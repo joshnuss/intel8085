@@ -5,56 +5,11 @@
 #include <iostream>
 #include <sstream>
 
+#include "token.h"
+
 using namespace std;
-using namespace boost;
 
-class Token {
-  private:
-    string label, operation;
-    list<string> parameters;
-    unsigned long lineNumber;
-
-  public: 
-    Token() : lineNumber(0) {
-    }
-
-    string to_s() {
-      ostringstream result;
-
-      result.width(8);
-      result << right << lineNumber << " ";
-
-      if (!label.empty()) {
-        result << label << ": ";
-      }
-
-      result << "\t" << operation << " ";
-      
-      unsigned int i=0;
-      for (list<string>::iterator it=parameters.begin();it != parameters.end(); it++) {
-        i++;
-        result << *it;
-
-        if (i < parameters.size())
-          result << ",";
-      }
-      return result.str();
-    }
-
-    void setLineNumber(unsigned long value) {
-      lineNumber = value;
-    }
-    void setLabel(string value) {
-      label = value;
-    }
-    void setOperation(string value) {
-      operation = value;
-    }
-    void addParameter(string value) {
-      parameters.push_back(value);
-    }
-};
-
+/*
 class Lexer {
   private:
     unsigned long lineNumber;
@@ -118,23 +73,19 @@ class Lexer {
       return result.str();
     }
 };
+*/
 
 int main(int argc, char* argv[]) {
-  /*
-  Token token;
-  token.setLineNumber(1);
-  token.setLabel("TEST");
-  token.setOperation("MVI");
-  token.addParameter("A");
-  token.addParameter("05H");
+  Token token(1, LINE_START);
 
   cout << token.to_s() << endl;
 
   token.setLineNumber(2);
-  token.setLabel("");
+  token.setType(TEXT);
+  token.setValue("FOO");
   cout << token.to_s() << endl;
-  */
 
+  /*
   Lexer lexer;
   lexer.parse_line("TEST: MVI A,B");
   lexer.parse_line("DAA");
@@ -142,4 +93,5 @@ int main(int argc, char* argv[]) {
   lexer.parse_line("LXI D, nn");
   
   cout << lexer.to_s();
+  */
 }
