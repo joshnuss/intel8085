@@ -8,8 +8,8 @@
 #include "token.h"
 
 using namespace std;
+using namespace boost;
 
-/*
 class Lexer {
   private:
     unsigned long lineNumber;
@@ -20,47 +20,44 @@ class Lexer {
     }
 
     void parse_line(string line) {
-      Token token;
-      token.setLineNumber(++lineNumber);
+      cout << line << endl;
+      lineNumber++;
 
-      int index = line.find(':');
-      string rest = line;
+      tokens.push_back(Token(lineNumber, LINE_START));
 
-      if (index > 0) {
-        string label = line.substr(0, index);
-        trim(label);
-        token.setLabel(label);
-        rest = line.substr(index+1);
-      }
-      trim(rest);
+      TokenType type = UNKNOWN;
+      string text = "";
 
-      index = rest.find(' ');
-      string operation;
-      if (index > 0) {
-        operation = rest.substr(0, index);
-        rest = rest.substr(index+1);
-      }
-      else {
-        operation = rest;
-        rest = "";
-      }
+      string::iterator it;
+      for ( it=line.begin(); it < line.end(); it++ ) {
+        switch(*it) {
+          case ',':
+            addUnlessEmpty(lineNumber, text);
+            tokens.push_back(Token(lineNumber, COMMA));
+            break;
+          case ':':
+            addUnlessEmpty(lineNumber, text);
+            tokens.push_back(Token(lineNumber, COLON));
+            break;
+          case ';':
+            addUnlessEmpty(lineNumber, text);
+            tokens.push_back(Token(lineNumber, SEMICOLON));
+            break;
+          case ' ':
+          case '\t':
+            addUnlessEmpty(lineNumber, text);
+            if (tokens.back().getType() != WHITESPACE)
+              tokens.push_back(Token(lineNumber, WHITESPACE));
+            break;
+          default:
+            text += *it;
+            break;
 
-      if (!operation.empty()) {
-        trim(operation);
-        token.setOperation(operation);
-
-        if (!rest.empty()) {
-          vector<string> SplitVec;
-          split(SplitVec, rest, is_any_of(","), token_compress_on );
-
-          for (vector<string>::iterator it=SplitVec.begin(); it != SplitVec.end(); it++) {
-            trim(*it);
-            token.addParameter(*it);
-          }
         }
       }
 
-      tokens.push_back(token);
+      addUnlessEmpty(lineNumber, text);
+      tokens.push_back(Token(lineNumber, LINE_END));
     }
 
     string to_s() {
@@ -72,10 +69,18 @@ class Lexer {
 
       return result.str();
     }
+
+  private:
+    void addUnlessEmpty(unsigned int lineNumber, string& text) {
+      if (!text.empty()) {
+        tokens.push_back(Token(lineNumber, TEXT, text));
+        text = "";
+      }
+    }
 };
-*/
 
 int main(int argc, char* argv[]) {
+  /*
   Token token(1, LINE_START);
 
   cout << token.to_s() << endl;
@@ -84,14 +89,13 @@ int main(int argc, char* argv[]) {
   token.setType(TEXT);
   token.setValue("FOO");
   cout << token.to_s() << endl;
+  */
 
-  /*
   Lexer lexer;
-  lexer.parse_line("TEST: MVI A,B");
+  lexer.parse_line("TEST:  MVI A,B ; BLA BLA BLA");
   lexer.parse_line("DAA");
   lexer.parse_line("JC a");
   lexer.parse_line("LXI D, nn");
   
   cout << lexer.to_s();
-  */
 }

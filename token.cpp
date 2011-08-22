@@ -69,14 +69,25 @@ string Token::to_s() {
   return result.str();
 }
 
+unsigned long Token::getLineNumber() {
+  return lineNumber;
+}
+
 void Token::setLineNumber(unsigned long value) {
   lineNumber = value;
+}
+
+TokenType Token::getType() {
+  return type;
 }
 
 void Token::setType(TokenType value) {
   type = value;
 }
 
+string Token::getValue() {
+  return value;
+}
 void Token::setValue(string val) {
   value = val;
 }
