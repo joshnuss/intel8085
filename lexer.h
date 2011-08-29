@@ -1,12 +1,7 @@
 #ifndef __LEXER_H__
 #define __LEXER_H__
 
-#include <string>
-#include <list>
-
 #include "token.h"
-
-using namespace std;
 
 class Lexer {
   private:

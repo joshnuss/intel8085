@@ -1,12 +1,4 @@
-#include <boost/algorithm/string.hpp>
-#include <string>
-#include <list>
-#include <sstream>
-
 #include "token.h"
-
-using namespace std;
-using namespace boost;
 
 Token::Token(unsigned long lineNumber, TokenType type, string value) {
   init(lineNumber, type, value);

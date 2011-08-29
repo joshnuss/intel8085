@@ -1,15 +1,7 @@
 #ifndef __TOKEN_H__
 #define __TOKEN_H__
 
-#include <boost/algorithm/string.hpp>
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <sstream>
-
-using namespace std;
-using namespace boost;
+#include "iasm.h"
 
 enum TokenType {
   UNKNOWN,

@@ -1,13 +1,4 @@
-#include <boost/algorithm/string.hpp>
-#include <string>
-#include <vector>
-#include <list>
-#include <iostream>
-#include <sstream>
-
 #include "lexer.h"
-
-using namespace boost;
 
 Lexer::Lexer() : lineNumber(0) {
 }
