@@ -36,7 +36,7 @@ class Token {
     Token(unsigned long lineNumber, TokenType type);
     Token(unsigned long lineNumber);
     Token();
-    string to_s();
+    string toString();
 
     unsigned long getLineNumber();
     void setLineNumber(unsigned long value);

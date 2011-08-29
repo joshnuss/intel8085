@@ -24,7 +24,7 @@ Token::Token() {
   init(0, UNKNOWN, "");
 }
 
-string Token::to_s() {
+string Token::toString() {
   ostringstream result;
 
   result.width(8);
@@ -88,6 +88,7 @@ void Token::setType(TokenType value) {
 string Token::getValue() {
   return value;
 }
+
 void Token::setValue(string val) {
   value = val;
 }

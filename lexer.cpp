@@ -53,11 +53,11 @@ void Lexer::parse_line(string line) {
   tokens.push_back(Token(lineNumber, LINE_END));
 }
 
-string Lexer::to_s() {
+string Lexer::toString() {
   ostringstream result;
 
   for (list<Token>::iterator it= tokens.begin(); it != tokens.end(); it++) {
-    result << (*it).to_s() << endl;
+    result << (*it).toString() << endl;
   }
 
   return result.str();
@@ -68,4 +68,8 @@ void Lexer::addUnlessEmpty(unsigned int lineNumber, string& text) {
     tokens.push_back(Token(lineNumber, TEXT, text));
     text = "";
   }
+}
+
+list<Token> Lexer::getTokens() {
+  return tokens;
 }

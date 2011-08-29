@@ -16,7 +16,8 @@ class Lexer {
   public:
     Lexer();
     void parse_line(string line);
-    string to_s();
+    string toString();
+    list<Token> getTokens();
 
   private:
     void addUnlessEmpty(unsigned int lineNumber, string& text);

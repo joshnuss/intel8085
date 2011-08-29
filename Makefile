@@ -1,5 +1,7 @@
+OPTS := -g 
+
 default:
-	g++ token.cpp lexer.cpp main.cpp -o iasm
+	g++ $(OPTS) token.cpp lexer.cpp main.cpp -o iasm
 
 clean:
 	rm iasm
