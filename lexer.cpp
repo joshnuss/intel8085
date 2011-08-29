@@ -4,7 +4,6 @@ Lexer::Lexer() : lineNumber(0) {
 }
 
 void Lexer::parse_line(string line) {
-  cout << line << endl;
   lineNumber++;
 
   tokens.push_back(Token(lineNumber, LINE_START));
